@@ -1,0 +1,43 @@
+
+#app {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    line-height: 2em;
+    font-family: Menlo;
+}
+
+#location {
+    height: 2em;
+}
+
+#candy-box {
+    flex: 1;
+}
+
+#candy-box .candy {
+    display: flex;
+    flex-direction: row;
+    line-height: 2em;
+}
+
+.candy .key {
+    width: 30%;
+    padding: 0px 0.5em;
+}
+
+.candy .value {
+    width: 70%;
+    padding: 0 0.5em;
+}
+
+#input {
+    height: 2em;
+    border: none;
+    outline: none;
+    font-family: Menlo;
+    font-size: 16px;
+}

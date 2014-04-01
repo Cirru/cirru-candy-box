@@ -1,0 +1,31 @@
+{
+  "name": "cirru-candy-box",
+  "version": "0.0.2",
+  "description": "A colored redesign of Cirru Shell",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Cirru/cirru-candy-box.git"
+  },
+  "keywords": [
+    "cirru",
+    "shell"
+  ],
+  "author": "jiyinyiyong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cirru/cirru-candy-box/issues"
+  },
+  "homepage": "https://github.com/Cirru/cirru-candy-box",
+  "dependencies": {},
+  "devDependencies": {
+    "cirru-parser": "~0.7.1",
+    "cirru-html": "~0.1.7",
+    "shelljs": "~0.2.6",
+    "devtools-reloader-station": "0.0.3",
+    "vue": "~0.10.3"
+  }
+}
