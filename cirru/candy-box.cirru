@@ -1,18 +1,17 @@
 body#app
   #location
-    span
-      :v-model location
+    span.dir (:v-repeat stack)
+      = "{{$value}}"
   #candy-box
-    .candy
-      :v-repeat theScope
-      .key
-        :v-model "$key"
-      .value
-        :v-class "foundType($value)"
-        :v-model "escapeType($value)"
+    .candy (:v-repeat currentScope)
+      .key $ span (:v-model "$key")
+      .value $ span
+        :v-class "foundType($value != null ? $value : $data)"
+        :v-model "escapeType($value != null ? $value : $data)"
   input#input
     :autofocus
     :v-model command
+    :placeholder Type Commands...
     :v-on "keydown:confirm | key enter"
       , ", keydown:prevCommand | key up"
       , ", keydown:nextCommand | key down"

@@ -1,6 +1,5 @@
 
 read = (scope, exp, stack) ->
-  console.log 'read', exp
   if typeof exp is 'string'
     guess = Number exp
     if isNaN guess
@@ -32,6 +31,27 @@ methods =
       read scope, x, stack
     .reduce (x, y) ->
       x - y
+
+  'cd': (scope, args, stack) ->
+    name = args[0]
+    dest = read scope, name, stack
+    if dest?
+      stack.push name
+
+  '..': (scope, args, stack) ->
+    stack.pop()
+
+  'map': (scope, args, stack) ->
+    obj = {}
+    for pair in args
+      key = pair[0]
+      value = read scope, pair[1], stack
+      obj[key] = value
+    obj
+
+  'list': (scope, args, stack) ->
+    args.map (x) ->
+      read scope, x, stack
 
 exports.run = (scope, code, stack) ->
   read scope, code, stack

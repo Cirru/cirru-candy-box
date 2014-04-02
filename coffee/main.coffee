@@ -8,22 +8,26 @@ box = new Vue
   data:
     stack: []
     theScope:
-      a: 1
-      b: 'string'
-    command: 'set a 1'
+      nothing: 'empty'
+      s:
+        zero: 0
+    command: 'cd s'
     cacheCommand: ''
     history: []
     cursor: 0
   computed:
-    location: ->
-      @stack.join ' > '
+    currentScope: ->
+      dest = @theScope
+      for name in @stack
+        dest = dest[name]
+      dest
   methods:
     confirm: ->
       code = @command
       @history.unshift code
       @cursor = 0
       ast = (parse code)[0]
-      run @theScope, ast, @stack
+      run @currentScope, ast, @stack
       @$set 'theScope', @theScope
       @command = ''
     prevCommand: (event) ->
@@ -42,12 +46,20 @@ box = new Vue
         else
           @command = @cacheCommand
     foundType: (value) ->
+      if Array.isArray value
+        return 'type-list'
       type = typeof value
-      "type-#{type}"
+      switch type
+        when 'number' then 'type-number'
+        when 'string' then 'type-string'
+        when 'object' then 'type-map'
+        when 'function' then 'type-function'
     escapeType: (value) ->
+      if Array.isArray value
+        return '[List]'
       type = typeof value
       switch type
         when 'number' then value
         when 'string' then "\"#{value}\""
-        when 'object' then '[Object]'
+        when 'object' then '[Map]'
         when 'function' then '[Function]'
